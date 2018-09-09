@@ -21,6 +21,4 @@ const app_routes: Routes = [
     ]
 
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule { }
