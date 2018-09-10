@@ -133,3 +133,8 @@
     -webkit-animation-name: flip;
     animation-name: flip;
   }
+
+  svg path,
+    svg rect{
+      fill: black;
+  }
