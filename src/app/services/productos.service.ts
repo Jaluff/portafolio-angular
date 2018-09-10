@@ -16,7 +16,7 @@ export class ProductosService {
 
    }
 
-   private cargarProductos(){
+   private cargarProductos() {
 
     this.http.get('https://angular-udemy-800ee.firebaseio.com/productos_idx.json')
       .subscribe ((resp: ProductoInterface[]) => {
