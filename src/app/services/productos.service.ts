@@ -11,18 +11,19 @@ export class ProductosService {
   productos: ProductoInterface[] = [];
 
   constructor( private http: HttpClient ) {
-
     this.cargarProductos();
-
    }
 
    private cargarProductos() {
 
     this.http.get('https://angular-udemy-800ee.firebaseio.com/productos_idx.json')
       .subscribe ((resp: ProductoInterface[]) => {
-        console.log(resp);
         this.productos = resp;
         this.cargando = false;
       });
+   }
+
+   getProducto (id:string){
+      return this.http.get(`https://angular-udemy-800ee.firebaseio.com/productos/${ id }.json`);
    }
 }
