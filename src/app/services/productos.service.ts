@@ -17,10 +17,14 @@ export class ProductosService {
 
    private cargarProductos() {
 
-    this.http.get('https://angular-udemy-800ee.firebaseio.com/productos_idx.json')
-      .subscribe ((resp: ProductoInterface[]) => {
-        this.productos = resp;
-        this.cargando = false;
+      return new Promise (( resolve, reject ) =>{
+
+        this.http.get('https://angular-udemy-800ee.firebaseio.com/productos_idx.json')
+          .subscribe ((resp: ProductoInterface[]) => {
+            this.productos = resp;
+            this.cargando = false;
+            resolve();
+        });
       });
    }
 
@@ -29,9 +33,39 @@ export class ProductosService {
    }
 
    buscarProducto ( termino: string ) {
-      this.productosFiltrado = this.productos.filter( producto => {
-       return true;
-     });
-     console.log( this.productosFiltrado );
+
+    if (this.productos.length === 0 ) {
+      // cargar productos
+      this.cargarProductos().then( () => {
+      this.filtrarProductos ( termino );
+      });
+    } else {
+      //  aplicar filtro
+      this.filtrarProductos( termino );
+    }
+      // this.productosFiltrado = this.productos.filter( producto => {
+      //  return true;
+          // console.log( this.productosFiltrado );
    }
+
+  private filtrarProductos ( termino: string){
+    // console.log ( this.productos );
+
+    this.productosFiltrado = [];
+
+    termino = termino.toLowerCase();
+
+    this.productos.forEach( prod => {
+
+      const tituloLower = prod.titulo.toLocaleLowerCase();
+
+      if ( prod.categoria.indexOf( termino ) >= 0 || tituloLower.indexOf( termino ) >= 0 ) {
+
+        this.productosFiltrado.push( prod );
+
+      }
+
+    });
+
+  }
 }
