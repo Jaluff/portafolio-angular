@@ -17,7 +17,7 @@ export class ProductosService {
 
    private cargarProductos() {
 
-      return new Promise (( resolve, reject ) =>{
+      return new Promise (( resolve, reject ) => {
 
         this.http.get('https://angular-udemy-800ee.firebaseio.com/productos_idx.json')
           .subscribe ((resp: ProductoInterface[]) => {
@@ -48,7 +48,7 @@ export class ProductosService {
           // console.log( this.productosFiltrado );
    }
 
-  private filtrarProductos ( termino: string){
+  private filtrarProductos ( termino: string ) {
     // console.log ( this.productos );
 
     this.productosFiltrado = [];
