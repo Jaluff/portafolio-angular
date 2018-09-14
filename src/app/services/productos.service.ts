@@ -9,7 +9,7 @@ export class ProductosService {
 
   cargando = true;
   productos: ProductoInterface[] = [];
-  productosFiltrado: ProductoInterface[] =[]:
+  productosFiltrado: ProductoInterface[] = [];
 
   constructor( private http: HttpClient ) {
     this.cargarProductos();
@@ -24,7 +24,7 @@ export class ProductosService {
       });
    }
 
-   getProducto (id:string){
+   getProducto (id: string) {
       return this.http.get(`https://angular-udemy-800ee.firebaseio.com/productos/${ id }.json`);
    }
 
